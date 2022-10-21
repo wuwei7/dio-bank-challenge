@@ -8,4 +8,9 @@ public class SavingsAccount extends Account {
 		super.branchNumber = DEFAULT_BRANCH;
 		super.accountNumber = sequential++;
 	}
+	
+	public void printStatement() {
+		System.out.println("=== Savings Account Statement ===");
+		super.printStatements();
+	}
 }
