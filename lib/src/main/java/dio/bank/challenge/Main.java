@@ -11,16 +11,6 @@ public class Main {
 		int value = Integer.valueOf(scanner.nextLine());
 		askWhichAccount(value);
 		
-//		Account checkingAccount = new CheckingAccount();
-		
-//		askClientWhichTransaction();
-//		checkingAccount.withdrawQuestion();
-		
-//		checkingAccount.withdraw(100);		
-//		checkingAccount.deposit(100);
-		
-//		checkingAccount.printStatement();
-//		savingsAccount.printStatement();
 	}
 	
 	public static void askWhichAccount(int value) {
