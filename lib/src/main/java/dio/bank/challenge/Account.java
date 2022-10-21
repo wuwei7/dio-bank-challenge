@@ -6,11 +6,18 @@ import javax.swing.JOptionPane;
 
 public abstract class Account implements IAccount {
 
-	protected static final int DEFAULT_BRANCH = 1;
+	private static final int DEFAULT_BRANCH = 1;
+	private static int sequential = 1;
 	
 	protected int branchNumber;
 	protected int accountNumber;
 	protected double balance;
+	
+
+	public Account() {
+		this.branchNumber = DEFAULT_BRANCH;
+		this.accountNumber = sequential++;
+	}
 	
 	@Override
 	public void deposit(double amount) {
@@ -22,12 +29,11 @@ public abstract class Account implements IAccount {
 	public void withdraw(double amount) {
 		if ((this.balance - amount) >= -1000) {
 			this.balance -= amount;
+			System.out.println("Balance: " + getBalance());
 		} else {
 			JOptionPane.showMessageDialog(null, "$1000 overdraft limit reached. Give a smaller amount.");
-			withdraw(amount);
+			withdrawQuestion();
 		}
-		
-		System.out.println("Balance: " + getBalance());
 	}
 	
 	@Override
