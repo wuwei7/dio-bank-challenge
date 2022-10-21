@@ -5,18 +5,32 @@ import java.util.Scanner;
 public class Main {
 
 	public static void main(String[] args) {
-		//Scanner scanner = new Scanner(System.in);
+		Scanner scanner = new Scanner(System.in);
 		
-		Account checkingAccount = new CheckingAccount();
-		Account savingsAccount = new SavingsAccount();
+		System.out.println("Type 1 for checking account and 2 for savings account: ");
+		int value = Integer.valueOf(scanner.nextLine());
+		askClientWhichAccount(value);
 		
-		checkingAccount.withdraw(1000);
-		savingsAccount.deposit(1500);
+//		Account checkingAccount = new CheckingAccount();
 		
+//		askClientWhichTransaction();
+//		checkingAccount.withdrawQuestion();
 		
-		checkingAccount.printStatement();
-		System.out.println();
-		savingsAccount.printStatement();
+//		checkingAccount.withdraw(100);		
+//		checkingAccount.deposit(100);
+		
+//		checkingAccount.printStatement();
+//		savingsAccount.printStatement();
+	}
+	
+	public static void askClientWhichAccount(int value) {
+		if (value == 1) {
+			Account checkingAccount = new CheckingAccount();
+			checkingAccount.askClientWhichTransaction();
+		} else {
+			Account savingsAccount = new SavingsAccount();
+			savingsAccount.askClientWhichTransaction();
+		}
 	}
 
 }
