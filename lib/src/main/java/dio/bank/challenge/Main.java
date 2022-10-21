@@ -9,7 +9,7 @@ public class Main {
 		
 		System.out.println("Type 1 for checking account and 2 for savings account: ");
 		int value = Integer.valueOf(scanner.nextLine());
-		askClientWhichAccount(value);
+		askWhichAccount(value);
 		
 //		Account checkingAccount = new CheckingAccount();
 		
@@ -23,7 +23,7 @@ public class Main {
 //		savingsAccount.printStatement();
 	}
 	
-	public static void askClientWhichAccount(int value) {
+	public static void askWhichAccount(int value) {
 		if (value == 1) {
 			Account checkingAccount = new CheckingAccount();
 			checkingAccount.askClientWhichTransaction();
