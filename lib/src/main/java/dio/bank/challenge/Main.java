@@ -15,6 +15,7 @@ public class Main {
 	public static void scanner() {
 		Scanner scanner = new Scanner(System.in);
 		int value = Integer.valueOf(scanner.nextLine());
+		System.out.println();
 		askWhichAccount(value);
 	}
 	
