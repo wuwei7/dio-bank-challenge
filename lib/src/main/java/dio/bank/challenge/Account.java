@@ -11,17 +11,19 @@ public abstract class Account implements IAccount {
 	
 	@Override
 	public void deposit(double amount) {
-		
+		this.balance += amount;
 	}
 	
 	@Override
 	public void withdraw(double amount) {
+		this.balance -= amount;
 		
 	}
 	
 	@Override
 	public void transfer(double amount, Account targetAccount) {
-		
+		this.withdraw(amount);
+		targetAccount.deposit(amount);
 	}
 	
 	public int getBranchNumber() {
