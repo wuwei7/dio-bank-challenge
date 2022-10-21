@@ -6,7 +6,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		System.out.print("Type 1 to create a checking account and 2 to create a savings account: ");
+		System.out.println("Type 1 to create a checking account and 2 to create a savings account: ");
 		scanner();
 		System.out.println();
 		
