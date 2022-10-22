@@ -25,12 +25,13 @@ public abstract class Account implements IAccount {
 	}
 	
 	@Override
-	public void withdraw(double amount) {
+	public int withdraw(double amount) {
 		if ((this.balance - amount) >= -1000) {
 			this.balance -= amount;
+			return 0;
 		} else {
 			JOptionPane.showMessageDialog(null, "$1000 overdraft limit reached. Give a smaller amount.");
-			withdrawQuestion();
+			return 1;
 		}
 	}
 	
@@ -91,55 +92,47 @@ public abstract class Account implements IAccount {
 	
 	public void withdrawQuestion() {
 		System.out.println("How much would you like to withdraw?");
-		scannerMethod(1);
+		double amount = scanner();
+		callTransaction(1, amount);
 	}
 
 	public void depositQuestion() {
 		System.out.println("How much would you like to deposit?");
-		scannerMethod(2);
+		double amount = scanner();
+		callTransaction(2, amount);
 	}
 
 	public void transferQuestion(int accountType) {
 		if (accountType == 0) {
-			Account account = createAccount(accountType);
 			System.out.println("How much would you like to transfer?");
-			scannerMethod(account);
+			double amount = scanner();
+			callTransaction(3, amount);
 		} else {
-			Account account = createAccount(accountType);
 			System.out.println("How much would you like to transfer?");
-			scannerMethod(account);
+			double amount = scanner();
+			callTransaction(4, amount);
 		}
 	}
 	
-	public void scannerMethod(int transaction) {
-		Scanner scanner = new Scanner(System.in);
-		double amount = Double.valueOf(scanner.nextLine());
-		System.out.println();
+	public void callTransaction(int transaction, double amount) {
 		
 		if (transaction == 1) {
-			withdraw(amount);
+			int overdraft = withdraw(amount);
+			if (overdraft == 1) {
+				withdrawQuestion();
+			} else {
+				this.printStatement();				
+			}
 		} else if (transaction == 2) {
 			deposit(amount);
-		}
-		
-		scanner.close();
-	}
-	
-	public void scannerMethod(Account account) {
-		Scanner scanner = new Scanner(System.in);
-		double amount = Double.valueOf(scanner.nextLine());
-		System.out.println();
-		
-		Account savingsAccount = new SavingsAccount();
-		Account checkingAccount = new CheckingAccount();
-		
-		if (checkingAccount.equals(account)) {
+			this.printStatement();
+		} else if (transaction == 3) {
+			Account savingsAccount = createAccount(0);
 			transfer(amount, savingsAccount);
 		} else {
+			Account checkingAccount = createAccount(1);
 			transfer(amount, checkingAccount);
 		}
-		
-		scanner.close();
 	}
 	
 	public Account createAccount(int accountType) {
@@ -151,4 +144,12 @@ public abstract class Account implements IAccount {
 			return checkingAccount;
 		}
 	}
+	
+	public double scanner() {
+		Scanner scanner = new Scanner(System.in);
+		double amount = Double.valueOf(scanner.nextLine());
+		System.out.println();
+		return amount;
+	}
+	
 }
