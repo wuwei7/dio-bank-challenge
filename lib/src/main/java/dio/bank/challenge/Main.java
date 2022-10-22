@@ -8,7 +8,6 @@ public class Main {
 		
 		System.out.println("Type 1 to create a checking account and 2 to create a savings account: ");
 		scanner();
-		System.out.println();
 		
 	}
 	
