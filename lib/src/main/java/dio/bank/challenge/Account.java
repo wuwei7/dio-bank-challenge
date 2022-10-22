@@ -61,17 +61,17 @@ public abstract class Account implements IAccount {
 		return balance;
 	}
 	
-	public void askWhichTransaction(int value) {
+	public void askWhichTransaction(int accountType) {
 		System.out.println("What would you like to do?");
 		System.out.println("Choose 1 for withdrawal");
 		System.out.println("Choose 2 for deposit");
 		System.out.println("Choose 3 for transfer");
 		System.out.println("Choose 4 for statement");
-		scannerMethodTransaction(value);
+		scannerMethodTransaction(accountType);
 		
 	}
 	
-	public void scannerMethodTransaction(int value) {
+	public void scannerMethodTransaction(int accountType) {
 		Scanner scanner = new Scanner(System.in);
 		int transaction = Integer.valueOf(scanner.nextLine());
 		System.out.println();
@@ -80,8 +80,8 @@ public abstract class Account implements IAccount {
 			withdrawQuestion();
 		} else if (transaction == 2) {
 			depositQuestion();
-		} else if (transaction == 3 && (value == 0 || value == 1)) {
-			transferQuestion(value);
+		} else if (transaction == 3) {
+			transferQuestion(accountType);
 		} else if (transaction == 4) {
 			printStatement();
 		}
@@ -99,26 +99,26 @@ public abstract class Account implements IAccount {
 		scannerMethod(2);
 	}
 
-	public void transferQuestion(int value) {
-		if (value == 0) {
-			Account account = createAccount(value);
+	public void transferQuestion(int accountType) {
+		if (accountType == 0) {
+			Account account = createAccount(accountType);
 			System.out.println("How much would you like to transfer?");
 			scannerMethod(account);
 		} else {
-			Account account = createAccount(value);
+			Account account = createAccount(accountType);
 			System.out.println("How much would you like to transfer?");
 			scannerMethod(account);
 		}
 	}
 	
-	public void scannerMethod(int value) {
+	public void scannerMethod(int transaction) {
 		Scanner scanner = new Scanner(System.in);
 		double amount = Double.valueOf(scanner.nextLine());
 		System.out.println();
 		
-		if (value == 1) {
+		if (transaction == 1) {
 			withdraw(amount);
-		} else if (value == 2) {
+		} else if (transaction == 2) {
 			deposit(amount);
 		}
 		
@@ -142,8 +142,8 @@ public abstract class Account implements IAccount {
 		scanner.close();
 	}
 	
-	public Account createAccount(int value) {
-		if (value == 0) {
+	public Account createAccount(int accountType) {
+		if (accountType == 0) {
 			Account savingsAccount = new SavingsAccount();
 			return savingsAccount;
 		} else {
