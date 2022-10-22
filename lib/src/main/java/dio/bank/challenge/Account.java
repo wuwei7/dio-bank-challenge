@@ -38,7 +38,7 @@ public abstract class Account implements IAccount {
 	public void transfer(double amount, Account targetAccount) {
 		this.withdraw(amount);
 		targetAccount.deposit(amount);
-		printStatement();
+		this.printStatement();
 		System.out.println();
 		targetAccount.printStatement();
 	}
@@ -80,7 +80,7 @@ public abstract class Account implements IAccount {
 			withdrawQuestion();
 		} else if (transaction == 2) {
 			depositQuestion();
-		} else if (transaction == 3 && value == 0 || value == 1) {
+		} else if (transaction == 3 && (value == 0 || value == 1)) {
 			transferQuestion(value);
 		} else if (transaction == 4) {
 			printStatement();
@@ -103,11 +103,11 @@ public abstract class Account implements IAccount {
 		if (value == 0) {
 			Account account = createAccount(value);
 			System.out.println("How much would you like to transfer?");
-			scannerMethod(3, account);
+			scannerMethod(account);
 		} else {
 			Account account = createAccount(value);
 			System.out.println("How much would you like to transfer?");
-			scannerMethod(3, account);
+			scannerMethod(account);
 		}
 	}
 	
@@ -118,14 +118,14 @@ public abstract class Account implements IAccount {
 		
 		if (value == 1) {
 			withdraw(amount);
-		} else {
+		} else if (value == 2) {
 			deposit(amount);
 		}
 		
 		scanner.close();
 	}
 	
-	public void scannerMethod(int value, Account account) {
+	public void scannerMethod(Account account) {
 		Scanner scanner = new Scanner(System.in);
 		double amount = Double.valueOf(scanner.nextLine());
 		System.out.println();
@@ -133,7 +133,7 @@ public abstract class Account implements IAccount {
 		Account savingsAccount = new SavingsAccount();
 		Account checkingAccount = new CheckingAccount();
 		
-		if (savingsAccount.equals(account)) {
+		if (checkingAccount.equals(account)) {
 			transfer(amount, savingsAccount);
 		} else {
 			transfer(amount, checkingAccount);
